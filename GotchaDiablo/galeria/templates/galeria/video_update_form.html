@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}Actualizar Video{% endblock %}
+{% block contenido %}
+{% include 'galeria/includes/galeriav_menu.html'%}
+<main role="main">
+  <div class="container text-white">
+    <div class="row mt-3 mb-5">
+      <div class="col-md-9 mx-auto">
+        <div>
+          {% if 'ok' in request.GET %}
+            <p style="color: green;">
+              La video se edito correctamente.
+              <a href="{% url 'videos:video' video.id video.titulo|slugify %}">Haz click aquí para ver el resultado</a>.
+            </p>
+          {% endif %}
+          <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+              <input type="submit" value="Actualizar video" class="btn btn-outline-primary btn-block" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %} 

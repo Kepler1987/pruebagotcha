@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block titulo %}Ubicación{% endblock %}
+{% block contenido %}
+{% load static %}
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<img src="{% static 'core/img/logo.png' %}" class="img-fluid">
+		</div>
+		<div class="row mt-5 mb-5">
+			<div class="col-1 d-none d-lg-block"></div>
+				<div class="col-12 col-lg-5">
+					<img src="{% static 'core/img/fotos/mapa.jpg' %}" class="img-fluid img-thumbnail">
+				</div>
+				<div class="col-12 col-lg-5">
+				<video class="img-fluid img-thumbnail" type="video/mp4" src="{% static 'core/img/videos/ruta.mp4' %}" autobuffer autoloop loop controls poster="{% static 'core/img/fotos/9.jpg' %}"></video>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

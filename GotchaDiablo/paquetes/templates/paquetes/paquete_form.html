@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}Crear Paquete{% endblock %}
+{% block contenido %}
+{% include 'paquetes/includes/paquetes_menu.html'%}
+<main role="main">
+  <div class="container text-white">
+    <div class="row mt-3 mb-5">
+      <div class="col-md-9 mx-auto">
+        <h1 class="text-center">Crea un nuevo Paquete</h1>
+        <form action="" method="post">{% csrf_token %}
+          {{ form.as_p }}
+          <div class="text-center">
+            <input type="submit" value="Crear paquete" class="btn btn-outline-success btn-block" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

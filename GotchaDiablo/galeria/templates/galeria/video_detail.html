@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}{{video.titulo}}{% endblock %}
+{% block contenido %}
+{% include 'galeria/includes/galeriav_menu.html'%}
+<main role="main">
+  <div class="container text-center text-white">
+    <div class="row mt-3">
+      <div class="col-12 mx-auto">
+        <h2 class="section-heading mb-4 text-center">{{video.titulo}}</h2>
+        <div class="col-12">
+          <video src="{{video.video.url}}" autobuffer autoloop loop controls poster="/images/video.png" class="img-thumbnail"></video>
+        </div><br>
+          <p>Descripción:  {{video.descripcion|safe}}<br></p>
+          {% if request.user.is_staff %}
+            <p><a class="btn btn-outline-primary" href="{% url 'videos:actualizar' video.id %}">Editar</a>
+            <a class="btn btn-outline-danger" href="{% url 'videos:eliminar' video.id %}">Eliminar</a></p>
+          {% endif %}
+            <a class="btn btn-outline-warning btn-lg" href="{% url 'videos:videos' %}">Atras</a><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</main><hr>
+{% endblock %}

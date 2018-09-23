@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}{{foto.titulo}}{% endblock %}
+{% block contenido %}
+{% include 'galeria/includes/galeria_menu.html'%}
+<main role="main">
+  <div class="container text-center text-white">
+    <div class="row mt-3">
+      <div class="col-12 mx-auto">
+        <h2 class="section-heading mb-4 text-center">{{foto.titulo}}</h2>
+        <div class="col-12">
+          <img src="{{foto.foto.url}}" class="img-thumbnail">
+        </div><br>
+          <p>Descripción:  {{foto.descripcion|safe}}<br></p>
+          {% if request.user.is_staff %}
+            <p><a class="btn btn-outline-primary" href="{% url 'fotos:actualizar' foto.id %}">Editar</a>
+            <a class="btn btn-outline-danger" href="{% url 'fotos:eliminar' foto.id %}">Eliminar</a></p>
+          {% endif %}
+            <a class="btn btn-outline-warning btn-lg" href="{% url 'fotos:fotos' %}">Atras</a><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</main><hr>
+{% endblock %}

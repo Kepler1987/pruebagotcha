@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}{{paquete.titulo}}{% endblock %}
+{% block contenido %}
+{% include 'paquetes/includes/paquetes_menu.html'%}
+<main role="main">
+  <div class="container text-white">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4 text-center">{{paquete.titulo}}</h2>
+        <div>
+          Equipo:  {{paquete.equipo|safe}}<br>
+          Balas:  {{paquete.bolas|safe}}<br>
+          Precio:  ${{paquete.precio|safe}}<br>
+          Descripción:  {{paquete.descripcion|safe}}<br>
+          Valides:  {{paquete.valido|safe}}<hr>
+          {% if request.user.is_staff %}
+            <p><a class="btn btn-outline-primary" href="{% url 'paquetes:actualizar' paquete.id %}">Editar</a></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

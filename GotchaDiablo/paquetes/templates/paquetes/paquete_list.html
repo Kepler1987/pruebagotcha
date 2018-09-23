@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}Paquetes{% endblock %}
+{% block contenido %}
+{% include 'paquetes/includes/paquetes_menu.html'%}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <img src="{% static 'core/img/logo.png' %}" class="img-fluid">
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered table-dark mt-3 mb-3">
+      <thead>
+        <tr>
+        <th>Nombre del Paquete</th>
+        <th>Equipo</th>
+        <th>Balas</th>
+        <th>Precio</th>
+        <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for paquete in object_list %}
+          <tr>
+            <td>{{ paquete.titulo }}</td>
+            <td>{{ paquete.equipo }}</td>
+            <td>{{ paquete.bolas }}</td>
+            <td>{{ paquete.precio }}</td>
+            <td><a href="{% url 'paquetes:paquete' paquete.id paquete.titulo|slugify %}">Leer más</a></td>
+            {% if request.user.is_staff %}
+            <td>
+              <a href="{% url 'paquetes:actualizar' paquete.id %}">Editar</a>
+              | <a href="{% url 'paquetes:eliminar' paquete.id %}">Borrar</a>
+            </td>
+            {% endif %}
+          </tr>
+        {% empty %}
+            <td>No Existen paquetes</td>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div> 
+</div>
+{% endblock %}

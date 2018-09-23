@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block titulo %}{% endblock %} | Gotcha Diablo</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie-edge">
+		<!-- Estilos y fuentes del template  -->
+    	{% load static %}
+		<link href="{% static 'core/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'core/css/signin.css' %}" rel="stylesheet">
+		<link rel="icon" href="{% static 'core/img/favicon.ico' %}">
+		
+	</head>
+	<body style="background-color: rgba(0,0,0,0.9); background-attachment: fixed;">
+		<header>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		    	<a class="navbar-brand" href="{% url 'inicio' %}"><img src="{% static 'core/img/mascara.png' %}" width="40"></a>
+		    	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		    	</button>
+		    	<div class="collapse navbar-collapse" id="navbarCollapse">
+		    		<ul class="navbar-nav ml-auto">
+			        	<li class="nav-item {% if request.path == '/' %}active{% endif %}">
+			        		<a class="nav-link" href="{% url 'inicio' %}">Inicio <span class="sr-only">(current)</span></a>
+			        	</li>
+			          	<li class="nav-item dropdown">
+			            	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Eventos </a>
+			            	<div class="dropdown-menu">
+								<a href="{% url 'contacto' %}" class="dropdown-item">Promociones</a>
+								<a href="{% url 'contacto' %}" class="dropdown-item">Eventos</a>
+							</div>
+				        </li>
+				        <li class="nav-item {% if request.path|slice:":10" == '/paquetes/' %}active{% endif %}">
+				        	<a class="nav-link" href="{% url 'paquetes:paquetes' %}">Paquetes </a>
+				        </li>
+				        <li class="nav-item {% if request.path == '/ubicacion/' %}active{% endif %}">
+				        	<a class="nav-link" href="{% url 'ubicacion' %}">Ubicacion </a>
+				        </li>
+				        <li class="nav-item dropdown {% if request.path|slice:":10" == '/accounts/' %}active{% endif %}">
+				        	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Usuario </a>
+							<div class="dropdown-menu">
+								<a href="{% url 'login' %}" class="dropdown-item">Entrar </a>
+                				<a href="{% url 'signup' %}" class="dropdown-item">Registro </a>
+                				<a href="{% url 'profile' %}" class="dropdown-item">Perfil </a>
+							</div>
+						</li>
+						<li class="nav-item dropdown {% if request.path|slice:":20" == '/galeria/' %}active{% endif %} ">
+				        	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Galeria </a>
+							<div class="dropdown-menu">
+								<a href="{% url 'fotos:fotos' %}" class="dropdown-item">Fotos</a>
+								<a href="{% url 'videos:videos' %}" class="dropdown-item">Videos</a>
+							</div>
+						</li>
+						<li class="nav-item {% if request.path == '/reservacion/' %}active{% endif %}">
+				        	<a class="nav-link" href="{% url 'reservacion' %}">Reservaciones </a>
+				        </li>
+				        <li class="nav-item">
+				        	<a class="nav-link {% if request.path == '/contacto/' %}active{% endif %}" href="{% url 'contacto' %}">Contacto </a>
+				        </li>
+				        {% if request.user.is_authenticated %}
+				            <li class="nav-item">
+				            	<a class="nav-link disabled" href="">{{request.user.username}}</a>
+				            </li>
+				            <li class="nav-item">
+				            	<a class="nav-link" href="{% url 'logout' %}">Salir</a>
+				            </li>
+			            {% endif %}
+			        </ul>
+			    </div>
+		    </nav>
+		</header>
+		{% block contenido %}
+		{% endblock %}
+		<footer class="footer" style="text-align: center;">
+			<div class="container">
+				<span class="text-white">Gotcha Diablo © Copyright 2019.</span>
+			</div>
+		</footer>
+		<script src="{% static 'core/js/jquery-3.3.1.min.js' %}" ></script>
+		<script src="{% static 'core/js/popper.min.js' %}" ></script>
+		<script src="{% static 'core/js/bootstrap.min.js' %}" ></script>
+	</body>
+</html>

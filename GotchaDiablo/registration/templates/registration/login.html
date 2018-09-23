@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}Iniciar sesión{% endblock %}
+{% block contenido %}
+<style>.errorlist{color:red;} </style>
+<div id="cuerpo" class="text-center text-white">
+  <form class="form-signin" method="post">{% csrf_token %}
+    <img class="mb-4" src="{% static 'core/img/mascara.png' %}" alt="" width="77" height="85">
+    {% if 'register' in request.GET %}
+    <p style="color: green;">Usuario registrado correctamente, ya puedes iniciar session</p>
+    {% endif %}
+    <h1 class="h3 mb-3 font-weight-normal">Por favor ingresa</h1>
+    {% if form.non_field_errors %}
+    <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+    {% endif %}
+    <label for="username" class="sr-only">Usuario</label>
+    <input type="text" id="id_username"  name="username" class="form-control" placeholder="Usuario" required >
+    <label for="password" class="sr-only">Contraseña</label>
+    <input type="password" id="id_password" name="password" class="form-control" placeholder="Contrasena" required>
+    <input type="submit" class="btn btn-lg btn-outline-primary btn-block" value="Entrar">
+    <p>¿Ha olvidado su contraseña?</br>Puede recuperarla <a href="{% url 'password_reset' %}">áqui</a>.</p>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block titulo %}Confirmar eliminar video{% endblock %}
+{% block contenido %}
+{% include 'galeria/includes/galeria_menu.html'%}
+<main role="main">
+  <div class="container text-white">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <div>
+            <form action="" method="post">{% csrf_token %}
+                <h1 class="text-center">¿Estás seguro de que quieres borrar <b>"{{ object }}"</b>?</h1>
+                <input type="submit" value="Sí, borrar la video" class="btn btn-outline-danger btn-block" />
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %} 
